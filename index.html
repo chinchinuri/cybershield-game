@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Кіберщит — Держспецзв'язку</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="app">
+<section id="menu" class="screen active">
+  <div class="brand">
+    <div class="shield-mark"><span>⌁</span></div>
+    <div class="eyebrow">ДЕРЖСПЕЦЗВ'ЯЗКУ</div>
+    <h1>КІБЕРЩИТ</h1>
+    <p>ЗАХИСТИ ЦИФРОВУ УКРАЇНУ</p>
+  </div>
+  <button id="playBtn" class="primary">ГРАТИ</button>
+  <button id="howBtn" class="secondary">ЯК ЦЕ ПРАЦЮЄ</button>
+  <button id="soundBtn" class="sound-toggle">ЗВУК: УВІМК</button>
+  <div class="best">РЕКОРД: <span id="bestScore">0</span></div>
+</section>
+
+<section id="how" class="screen">
+ <div class="panel">
+  <div class="eyebrow">КІБЕРЗАХИСТ</div>
+  <h2>ЯК ЦЕ ПРАЦЮЄ</h2>
+  <p>До цифрової інфраструктури наближаються різні типи загроз. Вчасно виявляй їх і не блокуй нормальний трафік.</p>
+  <div class="legend">
+   <div><b>● DDoS</b><span>Швидкі масові запити. Знищуй їх серіями.</span></div>
+   <div><b>◆ ШКІДЛИВЕ ПЗ</b><span>Повільна, але сильна загроза.</span></div>
+   <div><b>◇ РОЗВІДНИК</b><span>Швидкий і малопомітний.</span></div>
+   <div><b>▣ ФІШИНГ</b><span>Над іконкою — текст повідомлення. Читай уважно: справжнє шахрайство блокуй, а легітимне сповіщення — не чіпай.</span></div>
+   <div><b>○ НОРМАЛЬНИЙ ТРАФІК</b><span>Не натискай. Помилкове блокування знижує стійкість.</span></div>
+  </div>
+  <div class="eyebrow">БОНУСИ</div>
+  <div class="legend">
+   <div><b>⚡ ШВИДКЕ РЕАГУВАННЯ</b><span>Уповільнює всі загрози на 5 секунд.</span></div>
+   <div><b>✚ ПОСИЛЕНИЙ ЗАХИСТ</b><span>Відновлює 15% стійкості системи.</span></div>
+   <div><b>⛨ РЕЗЕРВНА КОПІЯ</b><span>Поглинає один наступний пропущений удар.</span></div>
+   <div><b>◎ КІБЕРРОЗВІДКА</b><span>×1.5 до множника балів на 6 секунд.</span></div>
+   <div><b>☠ КІБЕРШТУРМ</b><span>Фінальний бос після 5-ї хвилі. Натискай на нього, поки відбиваєш решту атак.</span></div>
+  </div>
+  <button id="backBtn" class="secondary">НАЗАД</button>
+ </div>
+</section>
+
+<section id="game" class="screen">
+ <canvas id="canvas"></canvas>
+ <div class="hud">
+   <div class="hud-item"><span>СТІЙКІСТЬ</span><strong id="hp">100%</strong><div class="bar"><i id="hpBar"></i></div></div>
+   <div class="hud-item center"><span>ХВИЛЯ</span><strong id="wave">1</strong></div>
+   <div class="hud-item right"><span>РАХУНОК</span><strong id="score">0</strong></div>
+ </div>
+ <div id="objective" class="objective">ЗАХИСТИ СИСТЕМУ</div>
+ <div id="bossBar" class="boss-bar">
+   <div class="boss-label">КІБЕРШТУРМ</div>
+   <div class="boss-track"><i id="bossHp"></i></div>
+ </div>
+ <div id="combo" class="combo"></div>
+ <div id="toast" class="toast"></div>
+ <button id="pauseBtn" class="pause">Ⅱ</button>
+</section>
+
+<section id="results" class="screen">
+ <div class="panel result">
+   <div class="result-mark">✓</div>
+   <div class="eyebrow">РЕЗУЛЬТАТ</div>
+   <h2 id="resultTitle">КІБЕРЩИТ ВИСТОЯВ</h2>
+   <div class="big-score" id="finalScore">0</div>
+   <div class="stats">
+     <div><span>ВІДБИТО АТАК</span><b id="finalHits">0</b></div>
+     <div><span>ТОЧНІСТЬ</span><b id="finalAccuracy">0%</b></div>
+     <div><span>КОМБО</span><b id="finalCombo">×0</b></div>
+   </div>
+   <div class="eyebrow">ПО ТИПАХ ЗАГРОЗ</div>
+   <div class="type-stats" id="typeStats"></div>
+   <div class="eyebrow">ДОСЯГНЕННЯ</div>
+   <div class="achievements" id="achievements"></div>
+   <div class="advice">
+     <h3>ПАМ'ЯТАЙ</h3>
+     <p>Сильні паролі · MFA · увага до фішингу · оновлення · резервні копії</p>
+   </div>
+   <button id="shareBtn" class="secondary">ПОДІЛИТИСЯ РЕЗУЛЬТАТОМ</button>
+   <button id="againBtn" class="primary">ГРАТИ ЩЕ РАЗ</button>
+   <button id="menuBtn" class="ghost">МЕНЮ</button>
+ </div>
+</section>
+
+<div id="shareModal" class="modal">
+ <div class="share-card">
+   <div class="card-brand">ДЕРЖСПЕЦЗВ'ЯЗКУ</div>
+   <div class="card-shield">⌁</div>
+   <div class="card-title">КІБЕРЩИТ</div>
+   <div class="card-score" id="shareScore">0</div>
+   <div class="card-line">БАЛІВ</div>
+   <div class="card-stat"><span>ВІДБИТО АТАК</span><b id="shareHits">0</b></div>
+   <div class="card-stat"><span>ТОЧНІСТЬ</span><b id="shareAccuracy">0%</b></div>
+   <div class="card-footer">ЗАХИСТИ ЦИФРОВУ УКРАЇНУ</div>
+ </div>
+ <div class="modal-actions">
+   <button id="copyBtn" class="primary">КОПІЮВАТИ РЕЗУЛЬТАТ</button>
+   <button id="closeShare" class="secondary">ЗАКРИТИ</button>
+ </div>
+</div>
+</main>
+<script src="game.js"></script>
+</body>
+</html>
