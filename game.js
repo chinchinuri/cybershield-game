@@ -58,13 +58,13 @@ const UKRAINE_PTS=[[0.08,0.18],[0.24,0.09],[0.42,0.07],[0.58,0.11],[0.74,0.20],[
 function drawUkraineMap(){
  let minX=1,maxX=0,minY=1,maxY=0;
  UKRAINE_PTS.forEach(p=>{minX=Math.min(minX,p[0]);maxX=Math.max(maxX,p[0]);minY=Math.min(minY,p[1]);maxY=Math.max(maxY,p[1])});
- const bw=maxX-minX,bh=maxY-minY,cx=(minX+maxX)/2,cy=(minY+maxY)/2,size=Math.min(W,H)*.82,scale=size/Math.max(bw,bh),c=center();
+ const bw=maxX-minX,bh=maxY-minY,cx=(minX+maxX)/2,cy=(minY+maxY)/2,size=Math.min(W,H)*.52,scale=size/Math.max(bw,bh),c=center();
  ctx.save();ctx.beginPath();
  UKRAINE_PTS.forEach((p,i)=>{const x=c.x+(p[0]-cx)*scale,y=c.y+(p[1]-cy)*scale;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
  ctx.closePath();
  const glow=.10+Math.sin(gameTime*.8)*.03;
- ctx.fillStyle=`rgba(${THEME.blueRGB},${.05+glow*.4})`;ctx.fill();
- ctx.strokeStyle=`rgba(${THEME.goldRGB},${.16+glow})`;ctx.lineWidth=1.3;ctx.stroke();
+ ctx.fillStyle=`rgba(${THEME.blueRGB},${.02+glow*.18})`;ctx.fill();
+ ctx.strokeStyle=`rgba(${THEME.goldRGB},${.07+glow*.4})`;ctx.lineWidth=1;ctx.stroke();
  ctx.restore();
 }
 const TYPE_LABELS={ddos:"DDoS",malware:"ШКІДЛИВЕ ПЗ",scout:"РОЗВІДНИК",phishing:"ФІШИНГ"};
@@ -73,7 +73,7 @@ const ACH=[
  {id:"hits100",title:"100 ВІДБИТИХ АТАК",icon:"🛡",check:s=>s.hits>=100},
  {id:"combo10",title:"COMBO ×10",icon:"🔥",check:s=>s.maxCombo>=10},
  {id:"perfect",title:"100% ТОЧНІСТЬ",icon:"🎯",check:s=>s.attempts>0&&s.hits===s.attempts},
- {id:"boss",title:"КІБЕРШТУРМ ВІДБИТО",icon:"⚔",check:s=>s.bossDefeated},
+ {id:"boss",title:"КІБЕРШТУРМ ВІДБИТО",icon:"🏆",check:s=>s.bossDefeated},
  {id:"survivor",title:"СТІЙКІСТЬ 100%",icon:"💪",check:s=>s.hpEnd>=100}
 ];
 
@@ -106,7 +106,9 @@ function startGame(){
  threats=[];particles=[];bonuses=[];bonusTimer=9;effects={slowUntil:0,shieldCharges:0,multiplierUntil:0};
  typeStats={ddos:{stopped:0,leaked:0},malware:{stopped:0,leaked:0},scout:{stopped:0,leaked:0},phishing:{stopped:0,leaked:0}};falseBlocks=0;
  boss=null;bossActive=false;bossPhaseEnd=0;bossDefeated=false;
- spawnTimer=.2;last=performance.now();$("pauseBtn").textContent="Ⅱ";$("objective").textContent="ЗАХИСТИ СИСТЕМУ";if($("bossBar"))$("bossBar").classList.remove("show");updateHUD();requestAnimationFrame(loop);
+ spawnTimer=.2;last=performance.now();$("pauseBtn").textContent="Ⅱ";$("objective").textContent="ЗАХИСТИ СИСТЕМУ";if($("bossBar"))$("bossBar").classList.remove("show");
+ $("toast").classList.remove("show");$("toast").textContent="";$("combo").classList.remove("show");
+ updateHUD();requestAnimationFrame(loop);
 }
 function center(){return{x:W/2,y:H/2+10}}
 function pickType(){
